@@ -1,0 +1,40 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "C:\spring\mybatis-3-mapper.dtd">
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+
+<mapper namespace="dz.sofiane.apt_9.apt9.mappers.ConsultationMapper">
+
+
+
+    <resultMap id="consultationResultMap" type="dz.sofiane.apt_9.apt9.models.Consultation">
+        <result property="id" column="id" />
+        <result property="motif" column="motif" />
+        <result property="date_consultation" column="date_consultation" />
+        <result property="id_patient" column="id_patient" />
+    </resultMap>
+
+    <insert id="createConsultaion" parameterType="dz.sofiane.apt_9.apt9.models.Consultation">
+        INSERT INTO cabinet.consultation(id, motif,date_consultation,id_patient)
+        VALUES (#{id}, #{motif},#{date_consultation},#{id_patient})
+    </insert>
+
+
+    <update id="updateConsultaion" parameterType="dz.sofiane.apt_9.apt9.models.Consultation">
+        UPDATE cabinet.consultation
+        SET motif=#{motif}, date_consultation=#{date_consultation}
+        WHERE id=#{id}
+    </update>
+
+
+    <delete id="deletConsultation" parameterType="int">
+        DELETE FROM cabinet.consultation WHERE id=#{id}
+    </delete>
+
+    <select id="getById" parameterType="int" resultMap="consultationResultMap">
+        SELECT * FROM cabinet.consultation WHERE id = #{id}
+    </select>
+    <select id="getAllConsultation" resultMap="consultationResultMap">
+        SELECT * FROM cabinet.consultation
+    </select>
+</mapper>
+
